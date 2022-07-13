@@ -38,8 +38,8 @@ public class CategoryController {
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
 
-    @GetMapping("/update/{categoryID}")
-    public ResponseEntity<ApiResponse> updateCategory(@PathVariable("categoryID") Integer categoryId, @Valid @RequestBody Category category) {
+    @GetMapping("/update/{categoryId}")
+    public ResponseEntity<ApiResponse> updateCategory(@PathVariable("categoryId") Integer categoryId, @Valid @RequestBody Category category) {
         // check to see if the category exists
         if (Objects.nonNull(categoryService.readCategory(categoryId))) {
             categoryService.updateCategory(categoryId, category);
