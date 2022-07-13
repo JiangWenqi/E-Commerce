@@ -38,7 +38,7 @@ public class SwaggerConfig {
         );
         return new ApiInfoBuilder()
                 .title("E-commerce API")
-                .description("Documentation E-commerce api")
+                .description("Documentation E-commerce Api")
                 .version("1.0.0")
                 .license("Apache 2.0")
                 .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0")
