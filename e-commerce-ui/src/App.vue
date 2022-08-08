@@ -1,23 +1,22 @@
 <template>
   <div id="app">
     <div id="nav">
-      <NavbarView />
+      <Navbar />
     </div>
     <div style="min-height: 60vh">
       <router-view v-if="products && categories" :baseURL="baseURL" :products="products" :categories="categories"
         @fetchData="fetchData">
       </router-view>
     </div>
-    <FooterView />
+    <Footer />
   </div>
-  <router-view />
 </template>
 
 <script>
 
 const axios = require('axios');
-import NavbarView from "./components/NavbarView.vue"
-import FooterView from "./components/FooterView.vue"
+import Navbar from "./components/NavbarView.vue"
+import Footer from "./components/FooterView.vue"
 
 export default {
   data() {
@@ -28,7 +27,7 @@ export default {
     }
   },
 
-  components: { NavbarView, FooterView },
+  components: { Navbar, Footer },
   methods: {
     async fetchData() {
       // fetch products
