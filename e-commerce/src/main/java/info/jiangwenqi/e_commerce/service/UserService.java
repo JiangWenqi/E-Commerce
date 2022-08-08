@@ -3,6 +3,7 @@ package info.jiangwenqi.e_commerce.service;
 import info.jiangwenqi.e_commerce.dto.user.SignupDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupResponseDto;
 import info.jiangwenqi.e_commerce.exception.CustomException;
+import info.jiangwenqi.e_commerce.model.AuthenticationToken;
 import info.jiangwenqi.e_commerce.model.User;
 import info.jiangwenqi.e_commerce.repository.UserRepository;
 import info.jiangwenqi.e_commerce.util.Generator;
@@ -24,6 +25,9 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    AuthenticationTokenService authenticationTokenService;
+
     public SignupResponseDto signup(SignupDto signupDto) throws CustomException {
         // Check to see if the current email address has already been registered.
         if (Objects.nonNull(userRepository.findByEmail(signupDto.getEmail()))) {
@@ -42,6 +46,10 @@ public class UserService {
         try {
             // save the User
             userRepository.save(user);
+            // generate token for user
+            final AuthenticationToken authenticationToken = new AuthenticationToken(user);
+            // save token in database
+            authenticationTokenService.saveConfirmationToken(authenticationToken);
             // success in creating
             return new SignupResponseDto(1, "user created successfully");
         } catch (Exception e) {
