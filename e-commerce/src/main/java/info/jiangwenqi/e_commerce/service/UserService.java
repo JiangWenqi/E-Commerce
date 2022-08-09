@@ -1,12 +1,16 @@
 package info.jiangwenqi.e_commerce.service;
 
+import info.jiangwenqi.e_commerce.dto.user.SignInDto;
+import info.jiangwenqi.e_commerce.dto.user.SignInResponseDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupResponseDto;
+import info.jiangwenqi.e_commerce.exception.AuthenticationException;
 import info.jiangwenqi.e_commerce.exception.CustomException;
 import info.jiangwenqi.e_commerce.model.AuthenticationToken;
 import info.jiangwenqi.e_commerce.model.User;
 import info.jiangwenqi.e_commerce.repository.UserRepository;
 import info.jiangwenqi.e_commerce.util.Generator;
+import info.jiangwenqi.e_commerce.util.MessageStrings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +60,31 @@ public class UserService {
             // handle signup error
             throw new CustomException(e.getMessage());
         }
+    }
+
+    public SignInResponseDto signIn(SignInDto signInDto) throws AuthenticationException, CustomException {
+        // first find User by email
+        User user = userRepository.findByEmail(signInDto.getEmail());
+        if (!Objects.nonNull(user)) {
+            throw new AuthenticationException("user not present");
+        }
+        try {
+            // check if password is right
+            if (!user.getPassword().equals(Generator.hashPassword(signInDto.getPassword()))) {
+                // passwords do not match
+                throw new AuthenticationException(MessageStrings.WRONG_PASSWORD);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            throw new CustomException(e.getMessage());
+        }
+
+        AuthenticationToken token = authenticationTokenService.getToken(user);
+
+        if (!Objects.nonNull(token)) {
+            // token not present
+            throw new CustomException(MessageStrings.AUTH_TOKEN_NOT_PRESENT);
+        }
+
+        return new SignInResponseDto(1, token.getToken());
     }
 }

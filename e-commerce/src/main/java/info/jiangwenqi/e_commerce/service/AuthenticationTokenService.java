@@ -27,8 +27,8 @@ public class AuthenticationTokenService {
     /**
      * get token of the User
      *
-     * @param user
-     * @return
+     * @param user user
+     * @return token
      */
     public AuthenticationToken getToken(User user) {
         return repository.findTokenByUser(user);
@@ -37,8 +37,8 @@ public class AuthenticationTokenService {
     /**
      * get Uer from the token
      *
-     * @param token
-     * @return
+     * @param token token
+     * @return user
      */
 
     public User getUser(String token) {
@@ -52,15 +52,15 @@ public class AuthenticationTokenService {
     /**
      * check if the token is valid
      *
-     * @param token
-     * @throws AuthenticationException
+     * @param token token
+     * @throws AuthenticationException authentication failed
      */
     public void authenticate(String token) throws AuthenticationException {
         if (!Objects.nonNull(token)) {
             throw new AuthenticationException(MessageStrings.AUTH_TOKEN_NOT_PRESENT);
         }
         if (!Objects.nonNull(getUser(token))) {
-            throw new AuthenticationException(MessageStrings.AUTH_TOEKN_NOT_VALID);
+            throw new AuthenticationException(MessageStrings.AUTH_TOKEN_NOT_VALID);
         }
     }
 }
