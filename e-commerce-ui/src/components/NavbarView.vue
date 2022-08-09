@@ -28,26 +28,61 @@
                     </div>
                 </div>
             </form>
-            <div>
-                <router-link style="color: white" :to="{ name: 'AdminCategory' }">
-                    Category |
-                </router-link>
-                <router-link style="color: white" :to="{ name: 'AdminProduct' }">
-                    Products
-                </router-link>
-            </div>
         </div>
+        <div>
+        </div>
+        <!--      Admin drop down-->
+        <li class="nav-item dropdown">
+            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdownAdmin" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                <router-link class="dropdown-item" :to="{ name: 'AdminCategory' }">Category</router-link>
+                <router-link class="dropdown-item" :to="{ name: 'AdminProduct' }">Products</router-link>
+            </div>
+        </li>
+
+        <!--      Account drop down-->
+        <li class="nav-item dropdown">
+            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Accounts
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <router-link class="dropdown-item" v-if="!token" :to="{ name: 'SignIn' }">Log In</router-link>
+                <router-link class="dropdown-item" v-if="!token" :to="{ name: 'Signup' }">Sign Up</router-link>
+                <a class="dropdown-item" v-if="token" href="#" @click="signOut">Sign Out</a>
+            </div>
+        </li>
     </nav>
 
 </template>
 
 <script>
+import swal from 'sweetalert';
 export default {
     name: "NavbarView",
     data() {
+        return {
+            token: null
+        };
     },
     methods: {
+        signout() {
+            localStorage.removeItem('token');
+            this.token = null;
+            this.$router.push({ name: 'Home' });
+            swal({
+                text: "Logged you out. Visit Again",
+                icon: "success",
+                closeOnClickOutside: false,
+            });
+        }
     },
+    mounted() {
+        this.token = localStorage.getItem('token');
+    }
 }
 </script>
 

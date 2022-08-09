@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.Objects;
 
+/**
+ * @author wenqi
+ */
 @Service
 public class AuthenticationTokenService {
     @Autowired
@@ -18,7 +21,7 @@ public class AuthenticationTokenService {
     /**
      * save the confirmation token
      *
-     * @param authenticationToken
+     * @param authenticationToken token
      */
     public void saveConfirmationToken(AuthenticationToken authenticationToken) {
         repository.save(authenticationToken);
