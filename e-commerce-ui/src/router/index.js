@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomepageView from "../views/HomepageView.vue";
+import SignupView from "../views/SignupView.vue";
 import AddCategory from "../views/category/AddCategory";
 import Category from "../views/category/CategoryView";
 import EditCategory from "../views/category/EditCategory";
@@ -50,8 +51,13 @@ const routes = [
   {
     path: "/admin/product/:id",
     name: "EditProduct",
-    component: EditProduct,
+    component: EditProduct
   },
+  {
+    path: '/signup',
+    name: 'Signup',
+    component: SignupView
+  }
 ];
 
 const router = createRouter({
