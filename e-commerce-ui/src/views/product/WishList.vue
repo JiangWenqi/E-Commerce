@@ -7,7 +7,8 @@
         </div>
 
         <div class="row">
-            <div v-for="product of products" :key="product.id" class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
+            <div v-for="product of products" :key="product.id"
+                class="col-md-6 col-xl-4 col-12 pt-3  justify-content-around d-flex">
                 <ProductBox :product="product">
                 </ProductBox>
             </div>
@@ -21,14 +22,14 @@ import ProductBox from '../../components/product/ProductBox';
 export default {
     data() {
         return {
-            products:null,
-            token:null
+            products: null,
+            token: null
         }
     },
     name: 'ProductView',
-    components : {ProductBox},
-    props : [ "baseURL"],
-    methods : {
+    components: { ProductBox },
+    props: ["baseURL"],
+    methods: {
         fetchWishlist() {
 
             // fetch products
@@ -45,9 +46,9 @@ export default {
 </script>
 
 <style scoped>
-    h4 {
-        font-family: 'Roboto', sans-serif;
-        color: #484848;
-        font-weight: 700;
-    }
+h4 {
+    font-family: 'Roboto', sans-serif;
+    color: #484848;
+    font-weight: 700;
+}
 </style>

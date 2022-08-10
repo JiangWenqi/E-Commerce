@@ -1,30 +1,27 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomepageView from "../views/HomepageView.vue";
-import SignupView from "../views/SignupView.vue";
-import SignInView from "../views/SignInView.vue";
+import HomepageView from "../views/HomepageView";
 import AddCategory from "../views/category/AddCategory";
-import Category from "../views/category/CategoryView";
+import CategoryView from "../views/category/CategoryView";
 import EditCategory from "../views/category/EditCategory";
 import AddProduct from "../views/product/AddProduct";
 import ProductView from "../views/product/ProductView";
 import EditProduct from "../views/product/EditProduct";
+import ShowDetails from "../views/product/ShowDetails";
+import SignupView from "../views/SignupView";
+import SignInView from "../views/SignInView";
 import WishList from "../views/product/WishList";
 import CartView from "../views/cart/CartView";
+import PaymentSuccess from "../views/payment/PaymentSuccess";
+import PaymentFailed from "../views/payment/PaymentFailed";
+import CheckoutView from "../views/checkout/CheckoutView";
+import OrderHistory from "../views/order/OrderHistory";
+import OrderDetails from "../views/order/OrderDetails";
 
 const routes = [
   {
     path: "/",
     name: "Home",
     component: HomepageView,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () =>
-    // import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
     path: "/admin/category/add",
@@ -34,7 +31,7 @@ const routes = [
   {
     path: "/admin/category",
     name: "AdminCategory",
-    component: Category,
+    component: CategoryView,
   },
   {
     path: "/admin/category/:id",
@@ -57,6 +54,11 @@ const routes = [
     component: EditProduct,
   },
   {
+    path: "/product/show/:id",
+    name: "ShowDetails",
+    component: ShowDetails,
+  },
+  {
     path: "/signup",
     name: "Signup",
     component: SignupView,
@@ -75,6 +77,32 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: CartView,
+  },
+
+  {
+    path: "/payment/success",
+    name: "PaymentSuccess",
+    component: PaymentSuccess,
+  },
+  {
+    path: "/payment/failed",
+    name: "PaymentFailed",
+    component: PaymentFailed,
+  },
+  {
+    path: "/checkout",
+    name: "Checkout",
+    component: CheckoutView,
+  },
+  {
+    path: "/orders",
+    name: "OrderHistory",
+    component: OrderHistory,
+  },
+  {
+    path: "/order/:id",
+    name: "OrderDetails",
+    component: OrderDetails,
   },
 ];
 

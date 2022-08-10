@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 text-center">
-        <h3 class="pt-3">Edit Product</h3>
+        <h4 class="pt-3">Edit Product</h4>
       </div>
     </div>
 
@@ -13,7 +13,8 @@
           <div class="form-group">
             <label>Category</label>
             <select class="form-control" v-model="categoryId" required>
-              <option v-for="category of categories" :key="category.id" :value="category.id">{{category.categoryName}}</option>
+              <option v-for="category of categories" :key="category.id" :value="category.id">{{ category.categoryName }}
+              </option>
             </select>
           </div>
           <div class="form-group">
@@ -41,50 +42,51 @@
 </template>
 
 <script>
-var axios =  require('axios');
+var axios = require('axios');
 import swal from 'sweetalert';
 export default {
-  data(){
+  data() {
     return {
-      id : null,
-      categoryId : 0,
-      name : null,
-      description : null,
-      imageURL : null,
-      price : 0,
-      productIndex : null
+      id: null,
+      categoryId: 0,
+      name: null,
+      description: null,
+      imageURL: null,
+      price: 0,
+      productIndex: null
     }
   },
-  props : ["baseURL", "products", "categories"],
-  methods : {
+  props: ["baseURL", "products", "categories"],
+  methods: {
     async editProduct() {
       const updatedProduct = {
-        id : this.id,
-        categoryId : this.categoryId,
-        name : this.name,
-        description : this.description,
-        imageURL : this.imageURL,
-        price : this.price
+        id: this.id,
+        categoryId: this.categoryId,
+        name: this.name,
+        description: this.description,
+        imageURL: this.imageURL,
+        price: this.price
       }
+
       await axios({
         method: 'post',
-        url: this.baseURL+"product/update/"+this.id,
-        data : JSON.stringify(updatedProduct),
+        url: this.baseURL + "product/update/" + this.id,
+        data: JSON.stringify(updatedProduct),
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      .then(() => {
-        //sending the event to parent to handle
-        this.$emit("fetchData");
-        this.$router.push({name : 'AdminProduct'});
-        swal({
-          text: "Product Updated Successfully!",
-          icon: "success",
-          closeOnClickOutside: false,
-        });
-      })
-      .catch(err => console.log("Hello", err));
+        .then(() => {
+          //sending the event to parent to handle
+          this.$emit("fetchData");
+          this.$router.push({ name: 'AdminProduct' });
+          swal({
+            text: "Product Updated Successfully!",
+            icon: "success",
+            closeOnClickOutside: false,
+          });
+        })
+        .catch(err => console.log("Hello", err));
     }
   },
   mounted() {

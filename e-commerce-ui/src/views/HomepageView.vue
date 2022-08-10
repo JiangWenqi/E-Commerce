@@ -2,7 +2,7 @@
   <div id="home">
     <!-- Page Wrapper -->
     <div id="background-div" class="page-holder bg-cover">
-      <!-- Home image as background of #background-div-->
+
       <div class="container py-5">
         <header class="text-left text-white py-5">
           <h3 class="mb-4 rounded"><a href="#start-shopping" class="bg-white px-2 py-2 rounded" id="heading">Start
@@ -13,7 +13,7 @@
         </header>
       </div>
     </div>
-    <!-- Categories-->
+
     <div id="start-shopping" class="container">
       <div class="row">
         <div class="col-12 text-left">
@@ -30,7 +30,6 @@
     </div>
 
     <hr>
-    <!-- Products-->
     <div class="container">
       <div class="row">
         <div class="col-12 text-left">
@@ -66,7 +65,7 @@ export default {
     this.category_size = Math.min(6, this.category_size);
 
     this.product_size = this.products.length;
-    this.product_size = Math.min(8, this.category_size);
+    this.product_size = Math.min(8, this.product_size);
   }
 }
 </script>

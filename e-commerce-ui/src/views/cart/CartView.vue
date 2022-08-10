@@ -29,8 +29,6 @@
                     </p>
                     <p id="item-total-price" class="mb-0">Total : <span class="font-weight-bold"> $
                             {{ cartItem.product.price * cartItem.quantity }}</span></p>
-                    <!--       1. make a function deleteItem and pass cartitem.id -->
-                    <br><a href="#" class="text-right" @click="deleteItem(cartItem.id)">Remove From Cart</a>
                 </div>
             </div>
             <div class="col-2"></div>
@@ -42,7 +40,8 @@
         <!-- display total price -->
         <div class="total-cost pt-2 text-right">
             <h5>Total : $ {{ totalcost }}</h5>
-            <button :disabled="isDisabled()" type="button" class="btn btn-primary confirm">Confirm Order</button>
+            <button :disabled="isDisabled()" type="button" class="btn btn-primary confirm" @click="checkout">Confirm
+                Order</button>
         </div>
     </div>
 </template>
@@ -73,28 +72,19 @@ export default {
                     const result = response.data;
                     // store cartitems and total price in two variables
                     this.cartItems = result.cartItems;
-                    this.totalcost = result.totalCost.toFixed(2);
+                    this.totalcost = result.totalCost
                 }
             },
                 (error) => {
                     console.log(error)
                 });
         },
-        //delete the cart item
-        deleteItem(itemId) {
-            // 2. first delete the item by calling delete api
-            axios.delete(`${this.baseURL}cart/delete/${itemId}/?token=${this.token}`)
-                .then((response) => {
-                    if (response.status == 200) {
-                        // 3. refresh the data by calling listCartItems
-                        this.listCartItems();
-                    }
-                }, (error) => {
-                    console.log(error)
-                })
-        }
-    },
+        // go to checkout page
+        checkout() {
+            this.$router.push({ name: 'Checkout' })
+        },
 
+    },
     mounted() {
         this.token = localStorage.getItem("token");
         this.listCartItems();
