@@ -4,13 +4,18 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * @author wenqi
+ */
 @Entity
 @Table(name = "tokens")
 public class AuthenticationToken {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
+    @Column(name = "token")
     private String token;
 
     @Column(name = "created_date")
@@ -20,13 +25,15 @@ public class AuthenticationToken {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+    public AuthenticationToken() {
+    }
+
     public AuthenticationToken(User user) {
         this.token = UUID.randomUUID().toString();
         this.createdDate = new Date();
         this.user = user;
     }
 
-    public AuthenticationToken() {}
 
     public Integer getId() {
         return id;

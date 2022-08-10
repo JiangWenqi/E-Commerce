@@ -1,6 +1,7 @@
 package info.jiangwenqi.e_commerce.controller;
 
 import info.jiangwenqi.e_commerce.common.ApiResponse;
+import info.jiangwenqi.e_commerce.exception.CategoryNotExistException;
 import info.jiangwenqi.e_commerce.model.Category;
 import info.jiangwenqi.e_commerce.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class CategoryController {
     }
 
     @GetMapping("/update/{categoryId}")
-    public ResponseEntity<ApiResponse> updateCategory(@PathVariable("categoryId") Integer categoryId, @Valid @RequestBody Category category) {
+    public ResponseEntity<ApiResponse> updateCategory(@PathVariable("categoryId") Integer categoryId, @Valid @RequestBody Category category){
         // check to see if the category exists
         if (Objects.nonNull(categoryService.readCategory(categoryId))) {
             categoryService.updateCategory(categoryId, category);

@@ -23,6 +23,7 @@ public class WishList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)

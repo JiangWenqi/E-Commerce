@@ -4,7 +4,7 @@ import info.jiangwenqi.e_commerce.exception.AuthenticationFailException;
 import info.jiangwenqi.e_commerce.model.AuthenticationToken;
 import info.jiangwenqi.e_commerce.model.User;
 import info.jiangwenqi.e_commerce.repository.AuthenticationTokenRepository;
-import info.jiangwenqi.e_commerce.util.MessageStrings;
+import info.jiangwenqi.e_commerce.config.MessageStrings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -13,13 +13,15 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "category_name")
     private @NotBlank String categoryName;
-
+    @Column(name = "description")
     private @NotBlank String description;
 
+    @Column(name = "image_url")
     private @NotBlank String imageUrl;
 
     public Category() {

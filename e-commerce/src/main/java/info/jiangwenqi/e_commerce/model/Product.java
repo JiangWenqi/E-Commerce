@@ -14,11 +14,17 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
+    @Column(name = "name")
     private @NotNull String name;
+    @Column(name = "image_url")
     private @NotNull String imageUrl;
+    @Column(name = "price")
     private @NotNull double price;
+
+    @Column(name = "description")
     private @NotNull String description;
 
     @JsonIgnore
@@ -26,8 +32,7 @@ public class Product {
     @JoinColumn(name = "category_id", nullable = false)
     Category category;
 
-    public Product( String name, String imageUrl, double price, String description, Category category) {
-        super();
+    public Product(String name, String imageUrl, double price, String description, Category category) {
         this.name = name;
         this.imageUrl = imageUrl;
         this.price = price;

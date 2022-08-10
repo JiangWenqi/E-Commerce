@@ -13,10 +13,11 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "cart")
+@Table(name = "carts")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
     @Column(name = "created_date")
@@ -30,6 +31,8 @@ public class Cart {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
+
+    @Column(name = "quantity")
     private int quantity;
 
     public Cart() {

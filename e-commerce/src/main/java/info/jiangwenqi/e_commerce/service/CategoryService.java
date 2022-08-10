@@ -1,5 +1,7 @@
 package info.jiangwenqi.e_commerce.service;
 
+import info.jiangwenqi.e_commerce.exception.CategoryNotExistException;
+import info.jiangwenqi.e_commerce.exception.CustomException;
 import info.jiangwenqi.e_commerce.model.Category;
 import info.jiangwenqi.e_commerce.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +45,13 @@ public class CategoryService {
     }
 
     public void updateCategory(Integer categoryId, Category category) {
-        Category oldCategory = categoryRepository.findById(categoryId).get();
-        oldCategory.setCategoryName(category.getCategoryName());
-        oldCategory.setDescription(category.getDescription());
-        oldCategory.setImageUrl(category.getImageUrl());
-        categoryRepository.save(oldCategory);
+        Optional<Category> optionalCategory = categoryRepository.findById(categoryId);
+        if (optionalCategory.isPresent()) {
+            Category oldCategory = optionalCategory.get();
+            oldCategory.setCategoryName(category.getCategoryName());
+            oldCategory.setDescription(category.getDescription());
+            oldCategory.setImageUrl(category.getImageUrl());
+            categoryRepository.save(oldCategory);
+        }
     }
 }

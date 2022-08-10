@@ -1,5 +1,8 @@
 package info.jiangwenqi.e_commerce.dto.user;
 
+/**
+ * @author wenqi
+ */
 public class SignupDto {
     private String firstName;
     private String lastName;

@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
     @Column(name = "first_name")
     private String firstName;
@@ -19,6 +20,9 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
+
+    public User() {
+    }
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;

@@ -20,32 +20,16 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public void addProduct(ProductDto productDto, Category category) {
-        Product product = getProductFromDto(productDto, category);
-        productRepository.save(product);
-    }
-
     public List<ProductDto> listProducts() {
-        // first fetch all the products
         List<Product> products = productRepository.findAll();
         List<ProductDto> productDtos = new ArrayList<>();
-
         for (Product product : products) {
-            // for each product change it to DTO
             productDtos.add(new ProductDto(product));
         }
         return productDtos;
     }
 
-    public void updateProduct(Integer productId, ProductDto productDto, Category category) {
-        Product product = getProductFromDto(productDto, category);
-        // set the id for updating
-        product.setId(productId);
-        // update
-        productRepository.save(product);
-    }
-
-    public Product getProductFromDto(ProductDto productDto, Category category) {
+    public static Product getProductFromDto(ProductDto productDto, Category category) {
         Product product = new Product();
         product.setCategory(category);
         product.setDescription(productDto.getDescription());
@@ -55,11 +39,25 @@ public class ProductService {
         return product;
     }
 
+
+    public void addProduct(ProductDto productDto, Category category) {
+        Product product = getProductFromDto(productDto, category);
+        productRepository.save(product);
+    }
+
+    public void updateProduct(Integer productId, ProductDto productDto, Category category) {
+        Product product = getProductFromDto(productDto, category);
+        product.setId(productId);
+        productRepository.save(product);
+    }
+
+
     public Product getProductById(Integer productId) throws ProductNotExistException {
-        Optional<Product> optionalProducts = productRepository.findById(productId);
-        if (optionalProducts.isEmpty()) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if (optionalProduct.isEmpty()) {
             throw new ProductNotExistException("Product id is invalid " + productId);
         }
-        return optionalProducts.get();
+        return optionalProduct.get();
     }
+
 }

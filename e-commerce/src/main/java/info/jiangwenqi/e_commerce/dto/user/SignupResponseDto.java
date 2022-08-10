@@ -4,6 +4,8 @@ package info.jiangwenqi.e_commerce.dto.user;
  * @author wenqi
  */
 public class SignupResponseDto {
+    private Integer status;
+    private String message;
     public Integer getStatus() {
         return status;
     }
@@ -25,6 +27,4 @@ public class SignupResponseDto {
         this.message = message;
     }
 
-    private Integer status;
-    private String message;
 }

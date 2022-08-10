@@ -17,6 +17,7 @@
         <java.version>18</java.version>
         <springfox.version>3.0.0</springfox.version>
         <mysql.version>8.0.30</mysql.version>
+        <stripe.version>21.1.0</stripe.version>
     </properties>
     <dependencies>
         <dependency>
@@ -64,6 +65,11 @@
             <artifactId>validation-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>${stripe.version}</version>
+        </dependency>
 
     </dependencies>
 

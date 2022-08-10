@@ -12,6 +12,15 @@ public class AddToCartDto {
     public AddToCartDto() {
     }
 
+    @Override
+    public String toString() {
+        return "AddToCartDto{" +
+                "id=" + id +
+                ", productId=" + productId +
+                ", quantity=" + quantity +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

@@ -1,4 +1,4 @@
-package info.jiangwenqi.e_commerce.util;
+package info.jiangwenqi.e_commerce.config;
 
 /**
  * @author wenqi
