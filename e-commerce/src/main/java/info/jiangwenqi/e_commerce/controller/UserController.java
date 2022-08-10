@@ -4,7 +4,7 @@ import info.jiangwenqi.e_commerce.dto.user.SignInDto;
 import info.jiangwenqi.e_commerce.dto.user.SignInResponseDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupResponseDto;
-import info.jiangwenqi.e_commerce.exception.AuthenticationException;
+import info.jiangwenqi.e_commerce.exception.AuthenticationFailException;
 import info.jiangwenqi.e_commerce.exception.CustomException;
 import info.jiangwenqi.e_commerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class UserController {
     }
 
     @PostMapping("/signIn")
-    public SignInResponseDto signIn(@RequestBody SignInDto signInDto) throws CustomException, AuthenticationException {
+    public SignInResponseDto signIn(@RequestBody SignInDto signInDto) throws CustomException, AuthenticationFailException {
         return userService.signIn(signInDto);
     }
 }

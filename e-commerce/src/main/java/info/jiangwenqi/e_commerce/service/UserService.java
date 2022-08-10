@@ -4,7 +4,7 @@ import info.jiangwenqi.e_commerce.dto.user.SignInDto;
 import info.jiangwenqi.e_commerce.dto.user.SignInResponseDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupDto;
 import info.jiangwenqi.e_commerce.dto.user.SignupResponseDto;
-import info.jiangwenqi.e_commerce.exception.AuthenticationException;
+import info.jiangwenqi.e_commerce.exception.AuthenticationFailException;
 import info.jiangwenqi.e_commerce.exception.CustomException;
 import info.jiangwenqi.e_commerce.model.AuthenticationToken;
 import info.jiangwenqi.e_commerce.model.User;
@@ -62,17 +62,17 @@ public class UserService {
         }
     }
 
-    public SignInResponseDto signIn(SignInDto signInDto) throws AuthenticationException, CustomException {
+    public SignInResponseDto signIn(SignInDto signInDto) throws AuthenticationFailException, CustomException {
         // first find User by email
         User user = userRepository.findByEmail(signInDto.getEmail());
         if (!Objects.nonNull(user)) {
-            throw new AuthenticationException("user not present");
+            throw new AuthenticationFailException("user not present");
         }
         try {
             // check if password is right
             if (!user.getPassword().equals(Generator.hashPassword(signInDto.getPassword()))) {
                 // passwords do not match
-                throw new AuthenticationException(MessageStrings.WRONG_PASSWORD);
+                throw new AuthenticationFailException(MessageStrings.WRONG_PASSWORD);
             }
         } catch (NoSuchAlgorithmException e) {
             throw new CustomException(e.getMessage());

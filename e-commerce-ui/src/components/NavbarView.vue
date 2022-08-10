@@ -5,6 +5,7 @@
             <img id="logo" src="../assets/icon.png" />
         </router-link>
 
+
         <!--    Burger Button-->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,11 +51,18 @@
                 Accounts
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <router-link class="dropdown-item" v-if="!token" :to="{ name: 'SignIn' }">WishList</router-link>
+                <router-link class="dropdown-item" v-else :to="{ name: 'WishList' }">WishList</router-link>
                 <router-link class="dropdown-item" v-if="!token" :to="{ name: 'SignIn' }">Log In</router-link>
                 <router-link class="dropdown-item" v-if="!token" :to="{ name: 'Signup' }">Sign Up</router-link>
-                <a class="dropdown-item" v-if="token" href="#" @click="signOut">Sign Out</a>
+                <a class="dropdown-item" v-if="token" href="#" @click="signout">Sign Out</a>
             </div>
         </li>
+        <li class="nav-item">
+            <router-link class="text-light" :to="{ name: 'Cart' }"><i class="fa fa-shopping-cart"
+                    style="font-size:36px"></i></router-link>
+        </li>
+
     </nav>
 
 </template>

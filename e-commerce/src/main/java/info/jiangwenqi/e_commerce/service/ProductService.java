@@ -1,6 +1,7 @@
 package info.jiangwenqi.e_commerce.service;
 
 import info.jiangwenqi.e_commerce.dto.product.ProductDto;
+import info.jiangwenqi.e_commerce.exception.ProductNotExistException;
 import info.jiangwenqi.e_commerce.model.Category;
 import info.jiangwenqi.e_commerce.model.Product;
 import info.jiangwenqi.e_commerce.repository.ProductRepository;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author wenqi
@@ -51,5 +53,13 @@ public class ProductService {
         product.setPrice(productDto.getPrice());
         product.setName(productDto.getName());
         return product;
+    }
+
+    public Product getProductById(Integer productId) throws ProductNotExistException {
+        Optional<Product> optionalProducts = productRepository.findById(productId);
+        if (optionalProducts.isEmpty()) {
+            throw new ProductNotExistException("Product id is invalid " + productId);
+        }
+        return optionalProducts.get();
     }
 }

@@ -1,6 +1,6 @@
 package info.jiangwenqi.e_commerce.service;
 
-import info.jiangwenqi.e_commerce.exception.AuthenticationException;
+import info.jiangwenqi.e_commerce.exception.AuthenticationFailException;
 import info.jiangwenqi.e_commerce.model.AuthenticationToken;
 import info.jiangwenqi.e_commerce.model.User;
 import info.jiangwenqi.e_commerce.repository.AuthenticationTokenRepository;
@@ -56,14 +56,14 @@ public class AuthenticationTokenService {
      * check if the token is valid
      *
      * @param token token
-     * @throws AuthenticationException authentication failed
+     * @throws AuthenticationFailException authentication failed
      */
-    public void authenticate(String token) throws AuthenticationException {
+    public void authenticate(String token) throws AuthenticationFailException {
         if (!Objects.nonNull(token)) {
-            throw new AuthenticationException(MessageStrings.AUTH_TOKEN_NOT_PRESENT);
+            throw new AuthenticationFailException(MessageStrings.AUTH_TOKEN_NOT_PRESENT);
         }
         if (!Objects.nonNull(getUser(token))) {
-            throw new AuthenticationException(MessageStrings.AUTH_TOKEN_NOT_VALID);
+            throw new AuthenticationFailException(MessageStrings.AUTH_TOKEN_NOT_VALID);
         }
     }
 }

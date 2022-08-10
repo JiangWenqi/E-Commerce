@@ -2,7 +2,7 @@ package info.jiangwenqi.e_commerce.controller;
 
 import info.jiangwenqi.e_commerce.common.ApiResponse;
 import info.jiangwenqi.e_commerce.dto.product.ProductDto;
-import info.jiangwenqi.e_commerce.exception.AuthenticationException;
+import info.jiangwenqi.e_commerce.exception.AuthenticationFailException;
 import info.jiangwenqi.e_commerce.model.Product;
 import info.jiangwenqi.e_commerce.model.User;
 import info.jiangwenqi.e_commerce.model.WishList;
@@ -33,7 +33,7 @@ public class WishListController {
      * API to add a new product in wishlist
      */
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> addWishList(@RequestBody ProductDto productDto, @RequestParam("token") String token) throws AuthenticationException {
+    public ResponseEntity<ApiResponse> addWishList(@RequestBody ProductDto productDto, @RequestParam("token") String token) throws AuthenticationFailException {
         // first authenticate if the token is valid
         authenticationTokenService.authenticate(token);
         // then fetch the user linked to the token
@@ -50,7 +50,7 @@ public class WishListController {
     }
 
     @GetMapping("/{token}")
-    public ResponseEntity<List<ProductDto>> getWishList(@PathVariable("token") String token) throws AuthenticationException {
+    public ResponseEntity<List<ProductDto>> getWishList(@PathVariable("token") String token) throws AuthenticationFailException {
         // first authenticate if the token is valid
         authenticationTokenService.authenticate(token);
         // then fetch the user linked to the token

@@ -8,6 +8,8 @@ import EditCategory from "../views/category/EditCategory";
 import AddProduct from "../views/product/AddProduct";
 import ProductView from "../views/product/ProductView";
 import EditProduct from "../views/product/EditProduct";
+import WishList from "../views/product/WishList";
+import CartView from "../views/cart/CartView";
 
 const routes = [
   {
@@ -52,17 +54,27 @@ const routes = [
   {
     path: "/admin/product/:id",
     name: "EditProduct",
-    component: EditProduct
+    component: EditProduct,
   },
   {
-    path: '/signup',
-    name: 'Signup',
-    component: SignupView
+    path: "/signup",
+    name: "Signup",
+    component: SignupView,
   },
   {
-    path: '/signIn',
-    name: 'SignIn',
-    component: SignInView
+    path: "/signIn",
+    name: "SignIn",
+    component: SignInView,
+  },
+  {
+    path: "/wishlist",
+    name: "WishList",
+    component: WishList,
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: CartView,
   },
 ];
 
